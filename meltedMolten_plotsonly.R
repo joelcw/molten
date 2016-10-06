@@ -8,24 +8,24 @@ library(dplyr)
 
 foo <- read.csv("~/CurrentLx/OldNorse/gentdigs/meltedMolten.pyccle.csv")
 
-metaEebo <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccle-eebo-phase1/dates-author-eebo.csv")
+#metaEebo <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccle-eebo-phase1/dates-author-eebo.csv")
 
 #getting the columns in the right order
-metaEebo2 <- data.frame(metaEebo$file,metaEebo$date,metaEebo$author,metaEebo$dob,metaEebo$dod)
+#metaEebo2 <- data.frame(metaEebo$file,metaEebo$date,metaEebo$author,metaEebo$dob,metaEebo$dod)
 
-colnames(metaEebo2) <- c("file","date","author","dob","dod")
+#colnames(metaEebo2) <- c("file","date","author","dob","dod")
 
-metaEcco <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccle-ecco/dates-author-ecco.csv")
+#metaEcco <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccle-ecco/dates-author-ecco.csv")
 
 #combining all meta data into one data frame
-allmeta <- rbind(metaEebo2,metaEcco)
+#allmeta <- rbind(metaEebo2,metaEcco)
 
 #gets rid of dupliate rows, which WOULD CAUSE PROBLEMS WHEN MERGING THEM!
-cleanmeta <- unique(allmeta)
+#cleanmeta <- unique(allmeta)
 
-write.csv(cleanmeta, file="~/CurrentLx/OldNorse/gentdigs/pyccleMeta.csv", row.names = FALSE)
+#write.csv(cleanmeta, file="~/CurrentLx/OldNorse/gentdigs/pyccleMeta.csv", row.names = FALSE)
 
-#cleanmeta <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccleMeta.csv")
+cleanmeta <- read.csv("~/CurrentLx/OldNorse/gentdigs/pyccleMeta.csv")
 
 ####Give appropriate column names to the columns
 
@@ -74,10 +74,12 @@ ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/FormByDateUnbinnedWithDots.pdf",
 
 
 
-##Create a binary numeric variable for Context so I can use the scale_y_continuous for cosmetic reasons, to try another plot below
 
-fulldata$ContextNum <- ifelse(fulldata$Context == "part", 1, 0)
-fulldata$ContextNum <- as.numeric(as.character(fulldata$ContextNum))
+
+##Create a binary numeric variable for Form so I can use the scale_y_continuous for cosmetic reasons, to try another plot below
+
+fulldata$FormNum <- ifelse(fulldata$Form == "molten", 1, 0)
+fulldata$FormNum <- as.numeric(as.character(fulldata$FormNum))
 
 ##Trying another plot without binning, in the style of whether/if plots:
 
@@ -85,7 +87,12 @@ p <- ggplot(fulldata, aes(date, FormNum, color=Context, group=Context)) + scale_
 
 ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/FormByDateUnbinnedWithDots2.pdf", width = 8, height = 5)
 
-#Putting meltd/molten on y, without binning, same style as above:
+#Putting melted/molten on y, without binning, same style as above:
+
+##Create a binary numeric variable for Context so I can use the scale_y_continuous for cosmetic reasons, to try another plot below
+
+fulldata$ContextNum <- ifelse(fulldata$Context == "part", 1, 0)
+fulldata$ContextNum <- as.numeric(as.character(fulldata$ContextNum))
 
 p <- ggplot(fulldata, aes(date, ContextNum, color=Form, group=Form)) + scale_y_continuous(name = "Probability of Participle (vs Adj)", breaks=seq(0,1,by=0.1), labels=c("Adj",seq(0.1,0.9,by = 0.1),"Part") ) + scale_x_continuous(name = "\nYear") + stat_sum(aes(size=..n.., alpha=.5)) + scale_size_area(max_size=12) + stat_smooth(alpha = 0.2) + scale_alpha_continuous(guide="none", limits = c(0,.9)) + scale_color_brewer(palette = "Set1") + theme_bw() + theme(panel.border = element_blank())
 
@@ -166,3 +173,29 @@ p <- ggplot(plot.data, aes(midlife, responseProp, color=Form, group=Form)) + lab
 
 
 ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/ContextByDateAuthor.pdf", width = 8, height = 5)
+
+#To figure out how many speakers you've included, do 
+
+plot.data
+
+plot.data[plot.data$midlife != "NA",]
+
+#To figure out how many tokens total are with those speakers
+sum(plot.data[plot.data$midlife != "NA",]$n,na.rm = TRUE)
+
+#As above, but cutting off some early speakers because it squishes the window of the graph
+
+p <- ggplot(plot.data, aes(midlife, responseProp, color=Form, group=Form)) + labs(y = "Proportion Use as Verbal Participle", x = "\nMid-life Year") + geom_point(aes(size = n)) + scale_size_area(max_size=12) + stat_smooth() + scale_alpha_continuous(guide="none", limits = c(0,.7)) + scale_color_brewer(palette = "Set1") + ylim(0,1) + xlim(1513,1805) + theme_bw() + theme(panel.border = element_blank()) + geom_line(aes(group=midlife, colour="Speaker"), alpha=0.5)
+
+
+
+ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/ContextByDateAuthor1513.pdf", width = 8, height = 5)
+
+
+#As above, but only 1550-1700 so you can see more action
+
+p <- ggplot(plot.data, aes(midlife, responseProp, color=Form, group=Form)) + labs(y = "Proportion Use as Verbal Participle", x = "\nMid-life Year") + geom_point(aes(size = n)) + scale_size_area(max_size=12) + stat_smooth() + scale_alpha_continuous(guide="none", limits = c(0,.7)) + scale_color_brewer(palette = "Set1") + ylim(0,1) + xlim(1550,1700) + theme_bw() + theme(panel.border = element_blank()) + geom_line(aes(group=midlife, colour="Speaker"), alpha=0.5)
+
+
+
+ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/ContextByDateAuthor1550.pdf", width = 8, height = 5)
