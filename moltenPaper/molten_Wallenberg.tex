@@ -136,7 +136,9 @@ The data clearly shows that during the period covered by the corpus, XXX to 1800
 
 Figure \ref{molten2} plots the same data, but with lines for syntactic context and proportion \textsl{molten} on the y-axis. From this view, one can see that \textsl{melted} is replacing \textsl{molten} in all contexts. However, the curve is steeper in the participle context, which becomes nearly entirely restricted to \textsl{melted} before the end of the time period. I fit a mixed-effects logistic regression with random intercepts for individual Text and Author, and main effects for Year\footnote{The year of text was converted to a z-score, centered around the mean, to allow the model to be fit.} of text and syntactic Context, which confirmed these intuitions. A model comparison between models with and without an interaction between Year and Context showed that the model with an interaction fit significantly better (p = 0.0003). AIC decreased from 4777.4 to 4766.0 and BIC decreased from 4812.3 to 4807.8 for the model with the interaction. It seems safe to conclude that the effect of syntactic context on the frequency of \textsl{molten} vs. \textsl{melted} changed over the time period; the frequencies of the two forms behaved differently over time in the two contexts.
 
-This dataset also provides the resolution to observe some individual speaker-systems with respect to this variable. There were 471 identifiable authors in this datanwhose birth and death dates were known, with an N of 3601 tokens for these speakers. Figure \ref{molten3} shows the data aggregated by author for all of these authors, plotted over time by their mid-life years. For ease of interpretation, Figure \ref{molten4} zooms in on just the subset of authors whose mid-life years occur during the century of most vigorous change, between 1570-1670. Intraspeaker
+This dataset also provides the resolution to observe some individual speaker-systems with respect to this variable. There were 471 identifiable authors in this datanwhose birth and death dates were known, with an N of 3601 tokens for these speakers. Figure \ref{molten3} shows the data aggregated by author for all of these authors, plotted over time by their mid-life years. For ease of interpretation, Figure \ref{molten4} zooms in on just the subset of authors whose mid-life years occur during the century of most vigorous change, between 1570-1670. Green verticle lines appear on the graph for any speaker who used both  \textsl{molten} and \textsl{melted} forms in this dataset, connecting the proportions of each used in the participle contexts.
+
+
 
 
 
@@ -145,7 +147,7 @@ This dataset also provides the resolution to observe some individual speaker-sys
 
 That it is specialization
 
-Intraspeaker
+By looking at the green lines, it is possible to get a sense of whether the forms had specialized for any given speaker, how much they'd specialized, and in which direction along the syntactic dimension of specialization. Casual inspection Intraspeaker
 
 \section{Limitations of the Study}
 \label{limitations}
@@ -204,7 +206,7 @@ query
 \begin{figure}
     \begin{center}
     \includegraphics[scale=.6]{ContextByDateUnbinnedWithDots2.pdf}
-    \caption{N =  7946 tokens}
+    \caption{Syntactic context by year of text, for \text{melted} and \textsl{molten} forms over time. N =  7946 tokens.}
        \label{molten1}
     \end{center}
 \end{figure}
@@ -212,7 +214,7 @@ query
 \begin{figure}
     \begin{center}
     \includegraphics[scale=.6]{FormByDateUnbinnedWithDots2.pdf}
-    \caption{N =  7946 tokens}
+    \caption{Proportion of \textsl{molten} uses by year of text, for both syntactic contexts over time. N =  7946 tokens.}
        \label{molten2}
     \end{center}
 \end{figure}
@@ -220,7 +222,7 @@ query
 \begin{figure}
     \begin{center}
     \includegraphics[scale=.6]{ContextByDateAuthor.pdf}
-    \caption{471 identifiable speakers, N = 3601}
+    \caption{Syntactic context by mid-life year of author, for \text{melted} and \textsl{molten} forms over time. Green lines connect proportions of participle use with \text{melted} and \text{molten} for speakers who used both forms. 471 identifiable speakers, N = 3601 tokens.}
        \label{molten3}
     \end{center}
 \end{figure}
@@ -228,7 +230,7 @@ query
 \begin{figure}
     \begin{center}
     \includegraphics[scale=.6]{ContextByDateAuthor1570.pdf}
-    \caption{Individual author \textsl{melted/molten} systems between 1570-1670}
+    \caption{Individual author \textsl{melted/molten} systems between 1570-1670.}
        \label{molten4}
     \end{center}
 \end{figure}
