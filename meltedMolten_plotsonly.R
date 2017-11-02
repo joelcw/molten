@@ -199,3 +199,14 @@ p <- ggplot(plot.data, aes(midlife, responseProp, color=Form, group=Form)) + lab
 
 
 ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/ContextByDateAuthor1550.pdf", width = 8, height = 5)
+
+#Figure out how many speakers, whose n is 10 or greater, are categorical in their assigning the forms to the two contexts
+
+
+speakers.data <- subset(plot.data, midlife != "NA" & n >= 10)
+
+speakers.data <- droplevels(speakers.data)
+
+speakers.data$cat <- ifelse(speakers.data$responseProp == 1 | speakers.data$responseProp == 0 , 1, 0)
+
+nrow(plot.data[plot.data$n>=10,])
