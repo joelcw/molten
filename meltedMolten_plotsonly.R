@@ -39,7 +39,7 @@ fulldata <- merge(foo, cleanmeta, by=c("file"), all.y=FALSE)
 
 write.csv(fulldata, file="~/CurrentLx/OldNorse/gentdigs/fulldataset.csv", row.names = FALSE)
 
-
+fulldata <- read.csv(file="~/CurrentLx/OldNorse/gentdigs/fulldataset.csv")
 library(gdata)
 
 
