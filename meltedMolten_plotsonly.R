@@ -202,11 +202,34 @@ ggsave(p, file = "~/CurrentLx/OldNorse/gentdigs/ContextByDateAuthor1550.pdf", wi
 
 #Figure out how many speakers, whose n is 10 or greater, are categorical in their assigning the forms to the two contexts
 
+speakers.data <- ddply(fulldata, .(author,Form),summarize, responseProp = mean(ContextNum, na.rm = T), n = sum(!is.na(ContextNum)))
 
-speakers.data <- subset(plot.data, midlife != "NA" & n >= 10)
+library(reshape2)
 
-speakers.data <- droplevels(speakers.data)
 
-speakers.data$cat <- ifelse(speakers.data$responseProp == 1 | speakers.data$responseProp == 0 , 1, 0)
+speakers.data.five <- subset(speakers.data, n >= 5 & author != "")
 
-nrow(plot.data[plot.data$n>=10,])
+speakers.data.five <- droplevels(speakers.data.five)
+
+#casting data such that I can see proportions for part in both melted and molten by speaker, with one unique speaker per line
+
+speakers.casted <- dcast(speakers.data.five, author~Form, value.var="responseProp")
+
+#removing dumb NAs that won't go away even though there must be a better way
+
+speakers.casted <- subset(speakers.casted, melted != "NA" & molten != "NA")
+
+speakers.casted <- droplevels(speakers.casted)
+
+#How many speakers were cat in either form's use?
+speakers.casted$cat <- ifelse(speakers.casted$melted != 1 & speakers.casted$melted != 0 &  speakers.casted$molten != 1 & speakers.casted$molten != 0, 0, 1)
+
+nrow(speakers.casted[speakers.casted$cat == 1,]) / nrow(speakers.casted)
+
+#How many speakers were cat in both?
+
+speakers.casted$bigCat <- ifelse((speakers.casted$melted == 1 & speakers.casted$molten == 0) |  (speakers.casted$molten == 1 & speakers.casted$melted == 0), 1, 0)
+
+#How many speakers wer in the community direction?
+
+speakers.casted$direction <- ifelse(speakers.casted$melted > speakers.casted$molten, 1, 0)
