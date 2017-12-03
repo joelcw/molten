@@ -233,3 +233,5 @@ speakers.casted$bigCat <- ifelse((speakers.casted$melted == 1 & speakers.casted$
 #How many speakers wer in the community direction?
 
 speakers.casted$direction <- ifelse(speakers.casted$melted > speakers.casted$molten, 1, 0)
+
+nrow(speakers.casted[speakers.casted$direction == 1,]) / nrow(speakers.casted)
