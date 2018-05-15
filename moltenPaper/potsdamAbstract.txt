@@ -1,0 +1,13 @@
+This article presents an empirical case study in the diachronic specialization of morphological forms for different syntactic contexts, and uses it to test aspects of the theory of variational specialization in \citet{wallenberg2016} and \citet{fruehwaldwallenberginprep}. Specifically, the study tests hypotheses about the speed of diachronic specialization, and answers a question I'll refer to as Yang's Paradox: how can we reconcile diachronic results showing that specialization is slow, with experimental results on acquisition showing that it's fast?
+
+To do this, the main empirical problem I focus on is the diachronic specialization of the forms \textsl{melted} and \textsl{molten} in pre-modern English. Though the forms initially had the same meaning and syntactic distribution, they eventually specialized for perfect/passive participle and adjectival contexts, respectively, as shown in examples (\ref{part1})-(\ref{adj1}).
+
+\begin{exe}
+	\ex \label{part1} The gold was \{melted / *molten\} by the fire. \textbf{(passive participle context)}
+	\ex \label{part2} The fire has \{melted / *molten\} the gold. \textbf{(perfect participle context)}
+	\ex \label{adj1} She shaped the \{?melted / molten\} gold into a ring. \textbf{(adjectival context)}
+\end{exe}
+
+\noindent Being at the word-level (or morpheme-level) of linguistic structure, this case is a good match for the acquisition literature that focuses on children's learning of novel lexical items. This study tests (and ultimately supports) the hypothesis that specialization in a speech community is orders of magnitude slower than specialization for an individual child in an experimental setting, due to the problem of coordinating the dimension and direction of specialization among many speakers. I also show how \citet{yang2000}'s variational grammar learning model can be extended to the problem of specialization.
+
+The first section below sets up the problem, providing some background on the idea of variational specialization and the set of empirical results that inspired it. It also introduces Yang's paradox as a potential problem for a unified account of specialization across domains of the grammar. Section \ref{methods} describes the \textsl{melted}/\textsl{molten} study, and section \ref{results} presents results from it. Section \ref{discuss} discusses the implications of this study for Yang's Paradox, and refines the theory of variational specialization in light of the additional empirical information the \textsl{melted}/\textsl{molten} study provides. Finally I conclude.
